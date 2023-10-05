@@ -32,7 +32,7 @@ function WhatsappMessage({ socket }) {
   const singleChatdata = useSelector(
     (state) => state?.ChatUserListReducer?.singleChat
   );
-
+   
   const handleFileChange = (e) => {
     const imagefile = e.target.files[0];
     setFile(imagefile);

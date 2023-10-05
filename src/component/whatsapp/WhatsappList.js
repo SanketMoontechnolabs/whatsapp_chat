@@ -13,7 +13,7 @@ import DonutLargeIcon from "@mui/icons-material/DonutLarge";
 import ChatIcon from "@mui/icons-material/Chat";
 import PropTypes from "prop-types";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-
+ 
 const WhatsappList = ({ socket }) => {
   const dispatch = useDispatch();
 
@@ -75,7 +75,7 @@ const WhatsappList = ({ socket }) => {
     dispatch(SingleChat(item));
     setChatKey(item._id);
   };
-  // console.log("22222222", count);
+  
   const filteredUsers = allUser?.filter((user) => user._id !== userData?._id);
 
   return (
