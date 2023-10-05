@@ -2,7 +2,7 @@ import ImgsViewer from "react-images-viewer";
 import PropTypes from "prop-types";
 const ImageViewer = ({ currImg, isOpen, setCurrImg, setIsOpen ,imageUrls}) => {
 
-    console.log("imageUrls",imageUrls);
+
   return (
     <div className="">
       <ImgsViewer
