@@ -48,7 +48,7 @@ function WhatsappMessage({ socket }) {
       socket.emit("add-user", singleChatdata?._id);
 
       socket.on("msg-recieved", (msg) => {
-        console.log("4111", msg);
+      
         setArrivalMessage({
           fromSelf: false,
           message: msg.message === "" ? msg.fileData : msg.message,
