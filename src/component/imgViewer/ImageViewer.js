@@ -4,7 +4,7 @@ const ImageViewer = ({ currImg, isOpen, setCurrImg, setIsOpen ,imageUrls}) => {
 
 
   return (
-    <div className="">
+    <div className="image_viewer">
       <ImgsViewer
         imgs={imageUrls.map((src) => ({ src }))}
         currImg={currImg}

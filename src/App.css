@@ -65,7 +65,7 @@
     margin-right:1.5rem !important;
 }
 
-.notification_menu .css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper{
+.notification_menu .MuiPaper-root.MuiPaper-elevation {
     left:1420px !important;
     top:62px !important;
     width: 19% !important;
@@ -77,7 +77,7 @@
 .sidebar_text{
     color:#ECECF1 !important
 }
-.active_list .css-1fqi8hc-MuiButtonBase-root-MuiListItemButton-root:hover {
+.active_list .sidebar_text:hover {
    
     background-color: #44475765 !important;
 }
@@ -96,7 +96,7 @@
     z-index: 2001 !important;   
     width: 25%!important;
 }
-.fade .img_pc9x2k-o_O-imgLoaded_9vayoh{
+.fade img {
     cursor: auto;
     max-height: calc(65vh - 140px) !important;
 }
