@@ -70,10 +70,9 @@
     top:62px !important;
     width: 19% !important;
  }
- 
-.drawer_bg .css-12i7wg6-MuiPaper-root-MuiDrawer-paper{
-    background-color: #202123 !important;
-   
+
+.drawer_bg .MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation0.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.MuiDrawer-paperAnchorDockedLeft.css-12i7wg6-MuiPaper-root-MuiDrawer-paper{
+    background-color: #202123 !important;  
 }
 .sidebar_text{
     color:#ECECF1 !important
@@ -82,7 +81,7 @@
    
     background-color: #44475765 !important;
 }
-.open_menu_icon.css-78trlr-MuiButtonBase-root-MuiIconButton-root{
+.drawer_bg .open_menu_icon.css-78trlr-MuiButtonBase-root-MuiIconButton-root{
     background-color: #343541 !important;
 }
 .container_a5721h {
@@ -97,7 +96,7 @@
     z-index: 2001 !important;   
     width: 25%!important;
 }
-.img_pc9x2k-o_O-imgLoaded_9vayoh{
+.fade .img_pc9x2k-o_O-imgLoaded_9vayoh{
     cursor: auto;
     max-height: calc(65vh - 140px) !important;
 }
