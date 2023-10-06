@@ -23,7 +23,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useMemo } from "react";
 import { store } from "../../redux/store";
 import Notification from "../../component/notification/Notification";
-import { makeStyles } from "@mui/styles";
+
 
 const drawerWidth = 240;
 
@@ -97,14 +97,10 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-const useStyles = makeStyles({
-  dividerColor: {
-    backgroundColor: "#4D4D4F",
-  },
-});
+
 
 export default function Sidebar({ children }) {
-  const classes = useStyles();
+  
   const clientid =
     "420808172961-qh7r67c4li8puci68jvg5l373c46k2dp.apps.googleusercontent.com";
 
@@ -245,7 +241,7 @@ export default function Sidebar({ children }) {
             {!open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader>
-        <Divider className={classes.dividerColor} />
+        <Divider className="dividerColor" />
         <List>
           {navigateArr.map((text, index) => (
             <Link key={text.name} to={text.route}>
@@ -287,7 +283,7 @@ export default function Sidebar({ children }) {
             </Link>
           ))}
         </List>
-        <Divider className={classes.dividerColor} />
+        <Divider className="dividerColor" />
         <List>
           {["All mail", "Trash", "Spam"].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: "block" }}>

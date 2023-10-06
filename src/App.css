@@ -101,3 +101,6 @@
     cursor: auto;
     max-height: calc(65vh - 140px) !important;
 }
+.dividerColor{
+    background-color: #4D4D4F !important;
+}
