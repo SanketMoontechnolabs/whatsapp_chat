@@ -71,7 +71,7 @@
     width: 19% !important;
  }
 
-.drawer_bg .MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation0.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.MuiDrawer-paperAnchorDockedLeft.css-12i7wg6-MuiPaper-root-MuiDrawer-paper{
+.drawer_bg .MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation0.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.MuiDrawer-paperAnchorDockedLeft{
     background-color: #202123 !important;  
 }
 .sidebar_text{
@@ -81,10 +81,10 @@
    
     background-color: #44475765 !important;
 }
-.drawer_bg .open_menu_icon.css-78trlr-MuiButtonBase-root-MuiIconButton-root{
+.drawer_bg .open_menu_icon.MuiIconButton-sizeMedium{
     background-color: #343541 !important;
 }
-.container_a5721h {
+#viewerBackdrop {
 
     display: flex !important;
     margin-inline: 52% !important;
