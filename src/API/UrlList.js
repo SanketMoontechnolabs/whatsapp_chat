@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === 'development') {
   })
 } else {
   Object.assign(URLS, {
-    BASE_URL: `${import.meta.env.VITE_REACT_APP_ENDPOINT}/api/v1`,
+    BASE_URL: `${import.meta.env.VITE_REACT_APP_LIVEPOINT}/api/v1`,
     X_API_KEY: import.meta.env.VITE_REACT_APP_API_KEY,
   })
 }
