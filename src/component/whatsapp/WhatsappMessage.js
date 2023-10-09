@@ -189,7 +189,7 @@ function WhatsappMessage({ socket }) {
               <div>
                 <img
                   className="w-10 h-10 rounded-full"
-                  src={`${URLS?.BASE_URL}/${singleChatdata?.profile_image}`}
+                  src={`${URLS?.IMAGE_URL}/${singleChatdata?.profile_image}`}
                 />
               </div>
               <div className="ml-4">

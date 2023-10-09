@@ -86,7 +86,7 @@ const WhatsappList = ({ socket }) => {
         <div className="flex items-center">
           <img
             className="mt-2 h-12 w-12  rounded-full"
-            src={`${URLS?.BASE_URL}/${userData?.profile_image}`}
+            src={`${URLS?.IMAGE_URL}/${userData?.profile_image}`}
             alt=""
           />
           <span className="mx-4">{userData?.name}</span>
@@ -125,7 +125,7 @@ const WhatsappList = ({ socket }) => {
               <div>
                 <img
                   className="h-12 w-12 rounded-full"
-                  src={`${URLS?.BASE_URL}/${item?.profile_image}`}
+                  src={`${URLS?.IMAGE_URL}/${item?.profile_image}`}
                 />
               </div>
               <div className="ml-4 flex-1 border-b border-grey-lighter py-4">

@@ -197,7 +197,7 @@ export default function Sidebar({ children }) {
             <Box sx={{ textAlign: "center", alignItems: "center" }}>
               <img
                 className=" h-12 w-12  rounded-full"
-                src={`${URLS?.BASE_URL}/${userData?.profile_image}`}
+                src={`${URLS?.IMAGE_URL}/${userData?.profile_image}`}
                 alt=""
               />
 

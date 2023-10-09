@@ -46,7 +46,7 @@ const Message = ({ message, userData, singleChatdata }) => {
             <>
               <img
                 className="h-[250px] w-[176px]  cursor-pointer"
-                src={`${URLS?.BASE_URL}/public/image/${urlSegment}`}
+                src={`${URLS?.IMAGE_URL}/public/image/${urlSegment}`}
                 onClick={() => {
                   setIsOpen(true);
                   setCurrImg(0);
