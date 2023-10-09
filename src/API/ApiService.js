@@ -14,8 +14,7 @@ const ApiService = async (url, type, data, formData = false, tokenValue = '') =>
     ...(tokenValue || token ? {Authorization: `Bearer ${tokenValue || token}`} : {}),
     // lan: 'ar',
   }
-console.log(1777, URLS.X_API_KEY);
-console.log(1888,import.meta.env.VITE_REACT_APP_LIVE_API_KEY);
+
   const requestOptions = {
     method: type,
     headers,
@@ -24,7 +23,7 @@ console.log(1888,import.meta.env.VITE_REACT_APP_LIVE_API_KEY);
   }
 
   const response = await fetch(`${URLS.BASE_URL}/${url}`, requestOptions)
-console.log("response",response);
+
   if (response.status === 401) {
     const result = await (
       await fetch(`${URLS.BASE_URL}/auth/refresh_token`, {

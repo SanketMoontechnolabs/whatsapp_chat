@@ -16,6 +16,7 @@ import ApiService from "../../API/ApiService";
 import { apiList } from "../../API/ApiList";
 import Message from "./Message";
 import { Notifications } from "../../redux/actions/AuthAction";
+import { URLS } from "../../API/UrlList";
 
 function WhatsappMessage({ socket }) {
   const [showPicker, setShowPicker] = useState(false);
@@ -188,7 +189,7 @@ function WhatsappMessage({ socket }) {
               <div>
                 <img
                   className="w-10 h-10 rounded-full"
-                  src={`http://localhost:5000/${singleChatdata?.profile_image}`}
+                  src={`${URLS?.BASE_URL}/${singleChatdata?.profile_image}`}
                 />
               </div>
               <div className="ml-4">

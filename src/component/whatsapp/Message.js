@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { useEffect, useRef } from "react";
 import ImageViewer from "../imgViewer/ImageViewer";
 import { useState } from "react";
+import { URLS } from "../../API/UrlList";
 
 const Message = ({ message, userData, singleChatdata }) => {
   const scrollRef = useRef();
@@ -45,7 +46,7 @@ const Message = ({ message, userData, singleChatdata }) => {
             <>
               <img
                 className="h-[250px] w-[176px]  cursor-pointer"
-                src={`http://localhost:5000/public/image/${urlSegment}`}
+                src={`${URLS?.BASE_URL}/public/image/${urlSegment}`}
                 onClick={() => {
                   setIsOpen(true);
                   setCurrImg(0);

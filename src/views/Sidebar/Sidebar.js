@@ -23,6 +23,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useMemo } from "react";
 import { store } from "../../redux/store";
 import Notification from "../../component/notification/Notification";
+import { URLS } from "../../API/UrlList";
 
 
 const drawerWidth = 240;
@@ -196,7 +197,7 @@ export default function Sidebar({ children }) {
             <Box sx={{ textAlign: "center", alignItems: "center" }}>
               <img
                 className=" h-12 w-12  rounded-full"
-                src={`http://localhost:5000/${userData?.profile_image}`}
+                src={`${URLS?.BASE_URL}/${userData?.profile_image}`}
                 alt=""
               />
 

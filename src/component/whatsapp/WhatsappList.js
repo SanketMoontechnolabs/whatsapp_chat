@@ -13,6 +13,7 @@ import DonutLargeIcon from "@mui/icons-material/DonutLarge";
 import ChatIcon from "@mui/icons-material/Chat";
 import PropTypes from "prop-types";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { URLS } from "../../API/UrlList";
  
 const WhatsappList = ({ socket }) => {
   const dispatch = useDispatch();
@@ -85,7 +86,7 @@ const WhatsappList = ({ socket }) => {
         <div className="flex items-center">
           <img
             className="mt-2 h-12 w-12  rounded-full"
-            src={`http://localhost:5000/${userData?.profile_image}`}
+            src={`${URLS?.BASE_URL}/${userData?.profile_image}`}
             alt=""
           />
           <span className="mx-4">{userData?.name}</span>
@@ -124,7 +125,7 @@ const WhatsappList = ({ socket }) => {
               <div>
                 <img
                   className="h-12 w-12 rounded-full"
-                  src={`http://localhost:5000/${item?.profile_image}`}
+                  src={`${URLS?.BASE_URL}/${item?.profile_image}`}
                 />
               </div>
               <div className="ml-4 flex-1 border-b border-grey-lighter py-4">

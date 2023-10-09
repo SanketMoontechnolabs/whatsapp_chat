@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import moment from "moment";
 import { useCallback } from "react";
 import { Notifications } from "../../redux/actions/AuthAction";
+import { URLS } from "../../API/UrlList";
 
 const Notification = ({ showNotification, setShowNotification }) => {
   const [notificationData, setNotificationData] = useState([]);
@@ -99,7 +100,7 @@ const Notification = ({ showNotification, setShowNotification }) => {
                           <div className="flex-shrink-0">
                             <img
                               className="rounded-full w-11 h-11"
-                              src={`http://localhost:5000/${item?.from?.profile_image}`}
+                              src={`${URLS?.BASE_URL}/${item?.from?.profile_image}`}
                               alt="Jese image"
                             />
                             <div className="absolute flex items-center justify-center w-5 h-5 ml-6 -mt-5 bg-blue-600 border border-white rounded-full dark:border-gray-800">
