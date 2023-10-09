@@ -7,6 +7,7 @@ import { io } from "socket.io-client";
 import { URLS } from "../../API/UrlList";
 
 export const socket = io(URLS.SOCKETURL);
+console.log(10,socket);
 const Whatsapp = () => {
   
   return (
