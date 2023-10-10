@@ -14,7 +14,7 @@ import ChatIcon from "@mui/icons-material/Chat";
 import PropTypes from "prop-types";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { URLS } from "../../API/UrlList";
- 
+
 const WhatsappList = ({ socket }) => {
   const dispatch = useDispatch();
 
@@ -50,7 +50,6 @@ const WhatsappList = ({ socket }) => {
 
   useEffect(() => {
     socket.on("getNotification", (res) => {
-  
       const isChatopen = singleChatdata?._id == res?.sender_id;
       console.log("isChatopen", isChatopen);
       if (isChatopen) {
@@ -70,15 +69,16 @@ const WhatsappList = ({ socket }) => {
       });
     };
     myfunction();
-  }, [socket, chatKey, allUser, singleChatdata,count]);
+  }, [socket, chatKey, allUser, singleChatdata, count]);
 
   const handleClick = async (e, item) => {
     dispatch(SingleChat(item));
     setChatKey(item._id);
   };
-  
-  const filteredUsers = allUser?.filter((user) => user._id !== userData?._id);
 
+  const filteredUsers = allUser?.filter((user) => user._id !== userData?._id);
+  console.log(81, filteredUsers);
+  console.log(81, loading);
   return (
     <div className="w-[25%] border flex flex-col">
       {/* Header */}
@@ -152,7 +152,7 @@ const WhatsappList = ({ socket }) => {
               </div>
             </div>
           ))
-        ) : search === "" || (search !== "" && filteredUsers?.length !== 0) ? (
+        ) :( search === "") || (search !== "" && filteredUsers?.length !== 0) ? (
           <Box
             display="flex"
             justifyContent="center"
@@ -161,12 +161,12 @@ const WhatsappList = ({ socket }) => {
           >
             <CircularProgress />
           </Box>
-        ) : (
-          !loading &&
-          filteredUsers?.length === 0 && (
+        ) : 
+          (!loading &&
+          filteredUsers?.length === 0) && (
             <p className="flex justify-center mt-5 text-lg"> user not found </p>
           )
-        )}
+        }
       </div>
     </div>
   );

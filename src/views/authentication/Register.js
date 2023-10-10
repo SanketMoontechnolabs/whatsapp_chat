@@ -48,6 +48,9 @@ const Register = () => {
       toast.success("Succesfully Create User");
       naviagte("/");
     }
+    else{
+      toast.error(apiRes.msg);
+    }
    
    
   };

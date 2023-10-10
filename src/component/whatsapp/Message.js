@@ -24,7 +24,7 @@ const Message = ({ message, userData, singleChatdata }) => {
       : message?.message?.fileName;
 
   useEffect(() => {
-    const imageUrl = `http://localhost:5000/public/image/${urlSegment}`;
+    const imageUrl = `${URLS?.IMAGE_URL}/image/${urlSegment}`;
 
     setImageUrls([imageUrl]);
   }, [urlSegment]);
@@ -46,7 +46,7 @@ const Message = ({ message, userData, singleChatdata }) => {
             <>
               <img
                 className="h-[250px] w-[176px]  cursor-pointer"
-                src={`${URLS?.IMAGE_URL}/public/image/${urlSegment}`}
+                src={`${URLS?.IMAGE_URL}/image/${urlSegment}`}
                 onClick={() => {
                   setIsOpen(true);
                   setCurrImg(0);
