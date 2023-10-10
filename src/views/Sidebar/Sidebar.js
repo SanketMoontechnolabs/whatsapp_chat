@@ -16,7 +16,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import { Fade, Grid, Menu, MenuItem } from "@mui/material";
+import { Fade, Grid, Menu, MenuItem, useMediaQuery } from "@mui/material";
 import { GoogleLogout } from "react-google-login";
 import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
@@ -25,8 +25,8 @@ import { store } from "../../redux/store";
 import Notification from "../../component/notification/Notification";
 import { URLS } from "../../API/UrlList";
 
-
 const drawerWidth = 240;
+const responsiveDrawerWidth = 66;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -42,6 +42,7 @@ const closedMixin = (theme) => ({
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
+
   overflowX: "hidden",
   width: `calc(${theme.spacing(7)} + 1px)`,
   [theme.breakpoints.up("xs")]: {
@@ -73,7 +74,9 @@ const AppBar = styled(MuiAppBar, {
   ...{
     display: "flex",
     ...theme.mixins.toolbar,
-    width: !open ? `calc(100% - ${drawerWidth}px)` : `calc(100% - 64px)`,
+    width: !open
+      ? `calc(100% - ${drawerWidth}px)`
+      : `calc(100% - ${responsiveDrawerWidth}px)`,
     transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -98,10 +101,8 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-
-
 export default function Sidebar({ children }) {
-  
+  const isScreenBelow1200px = useMediaQuery("(max-width: 1280px)");
   const clientid =
     "420808172961-qh7r67c4li8puci68jvg5l373c46k2dp.apps.googleusercontent.com";
 
@@ -173,6 +174,10 @@ export default function Sidebar({ children }) {
     }
   }, [currentRoute, navigateArr]);
 
+  React.useEffect(() => {
+    isScreenBelow1200px ? handleDrawerOpen() : handleDrawerClose();
+  }, [isScreenBelow1200px]);
+
   return (
     <Box sx={{ display: "flex", minHeight: "100vh" }}>
       <CssBaseline />
@@ -228,14 +233,10 @@ export default function Sidebar({ children }) {
         </div>
       </AppBar>
 
-      <Drawer
-        className="drawer_bg"
-        variant="permanent"
-        open={!open}
-      >
+      <Drawer className="drawer_bg" variant="permanent" open={!open}>
         <DrawerHeader>
           <IconButton
-          className="open_menu_icon"
+            className="open_menu_icon"
             style={{ color: "white" }}
             onClick={!open ? handleDrawerOpen : handleDrawerClose}
           >
@@ -247,7 +248,7 @@ export default function Sidebar({ children }) {
           {navigateArr.map((text, index) => (
             <Link key={text.name} to={text.route}>
               <ListItem
-              className="active_list"
+                className="active_list"
                 key={text.name}
                 disablePadding
                 sx={{
@@ -316,12 +317,11 @@ export default function Sidebar({ children }) {
 
       <Box
         component="main"
-
         sx={{
           flexGrow: 3,
           p: 5,
           mt: 8,
-          backgroundColor:"#F7F7F8",
+          backgroundColor: "#F7F7F8",
           width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
       >

@@ -15,7 +15,7 @@ import PropTypes from "prop-types";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { URLS } from "../../API/UrlList";
 
-const WhatsappList = ({ socket }) => {
+const WhatsappList = ({ socket, showChat }) => {
   const dispatch = useDispatch();
 
   const [allUser, setAllUser] = useState([]);
@@ -80,7 +80,9 @@ const WhatsappList = ({ socket }) => {
   console.log(81, filteredUsers);
   console.log(81, loading);
   return (
-    <div className="w-[25%] border flex flex-col">
+    <div
+      className={`xl:w-[25%] w-[100%]  border xl:flex hidden flex-col`}
+    >
       {/* Header */}
       <div className=" px-3 bg-grey-lighter flex flex-row justify-between items-center">
         <div className="flex items-center">
@@ -152,7 +154,7 @@ const WhatsappList = ({ socket }) => {
               </div>
             </div>
           ))
-        ) :( search === "") || (search !== "" && filteredUsers?.length !== 0) ? (
+        ) : search === "" || (search !== "" && filteredUsers?.length !== 0) ? (
           <Box
             display="flex"
             justifyContent="center"
@@ -161,12 +163,12 @@ const WhatsappList = ({ socket }) => {
           >
             <CircularProgress />
           </Box>
-        ) : 
-          (!loading &&
-          filteredUsers?.length === 0) && (
+        ) : (
+          !loading &&
+          filteredUsers?.length === 0 && (
             <p className="flex justify-center mt-5 text-lg"> user not found </p>
           )
-        }
+        )}
       </div>
     </div>
   );
@@ -174,6 +176,7 @@ const WhatsappList = ({ socket }) => {
 
 WhatsappList.propTypes = {
   socket: PropTypes.any,
+  showChat: PropTypes.any,
 };
 
 export default WhatsappList;

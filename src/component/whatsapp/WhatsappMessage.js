@@ -7,7 +7,7 @@ import AttachmentTwoToneIcon from "@mui/icons-material/AttachmentTwoTone";
 import MoreVertSharpIcon from "@mui/icons-material/MoreVertSharp";
 import SentimentSatisfiedAltRoundedIcon from "@mui/icons-material/SentimentSatisfiedAltRounded";
 import KeyboardVoiceRoundedIcon from "@mui/icons-material/KeyboardVoiceRounded";
-
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { store } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import EmptyChat from "./EmptyChat";
@@ -18,7 +18,7 @@ import Message from "./Message";
 import { Notifications } from "../../redux/actions/AuthAction";
 import { URLS } from "../../API/UrlList";
 
-function WhatsappMessage({ socket }) {
+function WhatsappMessage({ socket ,handleBackButtonClick,showChat}) {
   const [showPicker, setShowPicker] = useState(false);
   const [chosenEmoji, setChosenEmoji] = useState("");
   const [messages, setMessages] = useState([]);
@@ -178,7 +178,7 @@ function WhatsappMessage({ socket }) {
 
   console.log("1222", chosenEmoji);
   return (
-    <div className="w-[75%] border  flex flex-col" id="modal">
+    <div className="xl:w-[75%] w-[100%] border h-[100%] flex flex-col" id="modal">
       {singleChatdata === null ? (
         <EmptyChat />
       ) : (
@@ -186,6 +186,9 @@ function WhatsappMessage({ socket }) {
           {/* Header */}
           <div className="py-2 px-3 bg-grey-lighter flex flex-row justify-between items-center">
             <div className="flex items-center">
+              <div className="flex xl:hidden  mx-2" onClick={handleBackButtonClick}>
+              <ArrowBackIosIcon className="header_icon"/>
+              </div>
               <div>
                 <img
                   className="w-10 h-10 rounded-full"
@@ -212,7 +215,7 @@ function WhatsappMessage({ socket }) {
 
           {/* Messages */}
           <div
-            className="flex-1 overflow-auto"
+            className="flex-1 overflow-y-auto"
             style={{ backgroundColor: "#DAD3CC" }}
           >
             <div className="py-2 px-3">
@@ -304,6 +307,8 @@ function WhatsappMessage({ socket }) {
 
 WhatsappMessage.propTypes = {
   socket: PropTypes.any,
+  handleBackButtonClick: PropTypes.any,
+  showChat: PropTypes.any,
 };
 
 export default WhatsappMessage;
