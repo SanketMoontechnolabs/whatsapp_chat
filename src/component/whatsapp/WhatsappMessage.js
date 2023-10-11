@@ -190,7 +190,7 @@ console.log(179,showChat);
       id="modal"
     >
       {singleChatdata === null ? (
-        <EmptyChat />
+        <EmptyChat handleBackButtonClick={handleBackButtonClick}/>
       ) : (
         <>
           {/* Header */}

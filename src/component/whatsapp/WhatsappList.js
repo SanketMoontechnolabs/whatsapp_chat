@@ -76,8 +76,9 @@ const WhatsappList = ({ socket, showChat,setShowChat }) => {
   const handleClick = async (e, item) => {
     dispatch(SingleChat(item));
     setChatKey(item._id);
+    if (window.innerWidth < 1200) {
     setShowChat(val => !val)
-   
+    }
   };
 
   const filteredUsers = allUser?.filter((user) => user._id !== userData?._id);
