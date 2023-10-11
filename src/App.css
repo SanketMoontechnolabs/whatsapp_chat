@@ -5,8 +5,8 @@
 
 .header{
     background-color: #FFFFFF !important;
-    box-shadow:none !important;
-    height: 64px;
+   box-shadow:none !important;
+     height: 64px;
 }
 
 .header-menu{
@@ -85,7 +85,6 @@
     background-color: #343541 !important;
 }
 #viewerBackdrop {
-
     display: flex !important;
     margin-inline: 52% !important;
     max-height: 65vh !important;
@@ -103,3 +102,23 @@
 .dividerColor{
     background-color: #4D4D4F !important;
 }
+@media only screen and (max-width: 600px) {
+    .chat-messages {
+         padding: 0 !important;
+        display: block !important;
+        flex-direction: column;
+        gap: 1rem;
+        overflow: auto;
+       }
+       #viewerBackdrop {    
+        margin-inline: 22% !important;
+        width: 66%!important;
+    }
+    
+  }
+  @media only screen and (max-width: 445px) {   
+       #viewerBackdrop {
+        margin-inline: 33% !important;
+       width: 50%!important;
+    } 
+  }

@@ -31,3 +31,9 @@ export const AuthAction = (user) => {
       payload,
     }
   }
+  export const ShowClick = (payload) => {
+    return {
+      type: ActionTypes.SET_SHOW_CLICK,
+      payload,
+    }
+  }

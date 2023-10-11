@@ -5,6 +5,7 @@ const initialState = {
   chatUserData: null,
   singleChat:null,
   notification:null,
+  showclick: false,
  
 };
 
@@ -25,6 +26,11 @@ const ChatUserListReducer = (state = initialState, { type, payload }) => {
         return {
           ...state,
           notification: payload,
+        };
+        case ActionTypes.SET_SHOW_CLICK: 
+        return {
+          ...state,
+          showclick: payload,
         };
     
     default:

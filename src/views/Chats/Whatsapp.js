@@ -7,7 +7,7 @@ import { URLS } from "../../API/UrlList";
 import { useEffect, useState } from "react";
 
 export const socket = io(URLS.SOCKETURL);
-console.log(10, socket);
+
 const Whatsapp = () => {
   const [showChat, setShowChat] = useState(true);
 
@@ -19,11 +19,10 @@ const Whatsapp = () => {
  
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 1200) {
-        setShowChat(false);
-      } else {
+      if (window.innerWidth > 1200) {
         setShowChat(true);
-      }
+        setShowChat(val => !val);
+      } 
     };
 
     handleResize();
@@ -34,18 +33,18 @@ const Whatsapp = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  console.log(17,showChat);
+
   return (
     <Sidebar>
       <div className="">
         <div
-          className=" h-[103px] mt-[11px] "
+          className=" sm:h-[103px] h-[130px] mt-[11px] "
           style={{ backgroundColor: "#449388" }}
         />
-        <div className=" " style={{ marginTop: "-112px" }}>
+        <div className=" sm:mt-[-112px] mt-[-139px]" >
           <div className="py-2">
-            <div className="block xl:flex border border-grey rounded shadow-lg h-[800px] ">
-             <WhatsappList socket={socket} showChat={showChat}/>
+            <div className={`block xl:flex border border-grey rounded shadow-lg ${!showChat ?"h-[800px]":"h-[500px] md:h-[800px]"} `}>
+             <WhatsappList socket={socket} showChat={showChat} setShowChat={setShowChat}/>
                 <WhatsappMessage socket={socket} handleBackButtonClick={handleBackButtonClick} showChat={showChat}  />
             </div>
           </div>

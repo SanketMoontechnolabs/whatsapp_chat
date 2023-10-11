@@ -15,7 +15,7 @@ import PropTypes from "prop-types";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { URLS } from "../../API/UrlList";
 
-const WhatsappList = ({ socket, showChat }) => {
+const WhatsappList = ({ socket, showChat,setShowChat }) => {
   const dispatch = useDispatch();
 
   const [allUser, setAllUser] = useState([]);
@@ -25,6 +25,8 @@ const WhatsappList = ({ socket, showChat }) => {
   const { loading } = store.getState().LoaderReducer;
   const { userData } = store.getState().AuthReducer;
   const [chatKey, setChatKey] = useState("");
+  // const [showclick, setshowclick] = useState(false);
+
 
   const singleChatdata = useSelector(
     (state) => state?.ChatUserListReducer?.singleChat
@@ -51,7 +53,7 @@ const WhatsappList = ({ socket, showChat }) => {
   useEffect(() => {
     socket.on("getNotification", (res) => {
       const isChatopen = singleChatdata?._id == res?.sender_id;
-      console.log("isChatopen", isChatopen);
+  
       if (isChatopen) {
         setCount([{ ...res, isRead: true }]);
       } else {
@@ -74,18 +76,19 @@ const WhatsappList = ({ socket, showChat }) => {
   const handleClick = async (e, item) => {
     dispatch(SingleChat(item));
     setChatKey(item._id);
+    setShowChat(val => !val)
+   
   };
 
   const filteredUsers = allUser?.filter((user) => user._id !== userData?._id);
-  console.log(81, filteredUsers);
-  console.log(81, loading);
+  
   return (
     <div
-      className={`xl:w-[25%] w-[100%]  border xl:flex hidden flex-col`}
+      className={showChat ? "xl:w-[25%] w-[100%]  border xl:flex h-[500px] flex-col" :`xl:w-[25%] w-[100%]  border xl:flex hidden flex-col`}
     >
       {/* Header */}
-      <div className=" px-3 bg-grey-lighter flex flex-row justify-between items-center">
-        <div className="flex items-center">
+      <div className=" px-3 bg-grey-lighter sm:flex block flex-row justify-between items-center">
+        <div className="flex items-center ">
           <img
             className="mt-2 h-12 w-12  rounded-full"
             src={`${URLS?.IMAGE_URL}/${userData?.profile_image}`}
@@ -93,7 +96,7 @@ const WhatsappList = ({ socket, showChat }) => {
           />
           <span className="mx-4">{userData?.name}</span>
         </div>
-        <div className="flex">
+        <div className="flex sm:justify-start justify-end">
           <div>
             <DonutLargeIcon className="list_header_icon" />
           </div>
@@ -177,6 +180,7 @@ const WhatsappList = ({ socket, showChat }) => {
 WhatsappList.propTypes = {
   socket: PropTypes.any,
   showChat: PropTypes.any,
+  setShowChat: PropTypes.any,
 };
 
 export default WhatsappList;

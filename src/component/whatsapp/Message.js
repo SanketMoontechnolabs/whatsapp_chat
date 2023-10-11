@@ -35,17 +35,17 @@ const Message = ({ message, userData, singleChatdata }) => {
       className={`message 
                     ${message.fromSelf ? "sended" : "recieved"}`}
     >
-      <div className="max-w-[30%]">
+      <div className="sm:max-w-[30%] ">
         <div className="rounded py-2 px-3 content ">
           <p className="text-sm">
             {message.fromSelf ? userData?.name : singleChatdata?.name}
           </p>
           {!isImage || message.type === "text" ? (
-            <p className="break-all  mt-1">{message?.message}</p>
+            <p className="break-all sm:text-[1.1rem] text-sm  mt-1">{message?.message}</p>
           ) : (
             <>
               <img
-                className="h-[250px] w-[176px]  cursor-pointer"
+                className="sm:h-[250px] sm:w-[176px] h-[100px] w-[100px] cursor-pointer"
                 src={`${URLS?.IMAGE_URL}/image/${urlSegment}`}
                 onClick={() => {
                   setIsOpen(true);

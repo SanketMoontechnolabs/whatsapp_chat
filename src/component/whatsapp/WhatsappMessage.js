@@ -7,7 +7,7 @@ import AttachmentTwoToneIcon from "@mui/icons-material/AttachmentTwoTone";
 import MoreVertSharpIcon from "@mui/icons-material/MoreVertSharp";
 import SentimentSatisfiedAltRoundedIcon from "@mui/icons-material/SentimentSatisfiedAltRounded";
 import KeyboardVoiceRoundedIcon from "@mui/icons-material/KeyboardVoiceRounded";
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { store } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import EmptyChat from "./EmptyChat";
@@ -18,7 +18,7 @@ import Message from "./Message";
 import { Notifications } from "../../redux/actions/AuthAction";
 import { URLS } from "../../API/UrlList";
 
-function WhatsappMessage({ socket ,handleBackButtonClick,showChat}) {
+function WhatsappMessage({ socket, handleBackButtonClick, showChat }) {
   const [showPicker, setShowPicker] = useState(false);
   const [chosenEmoji, setChosenEmoji] = useState("");
   const [messages, setMessages] = useState([]);
@@ -33,7 +33,10 @@ function WhatsappMessage({ socket ,handleBackButtonClick,showChat}) {
   const singleChatdata = useSelector(
     (state) => state?.ChatUserListReducer?.singleChat
   );
-   
+  const showClickdata = useSelector(
+    (state) => state?.ChatUserListReducer?.showclick
+  );
+
   const handleFileChange = (e) => {
     const imagefile = e.target.files[0];
     setFile(imagefile);
@@ -49,7 +52,6 @@ function WhatsappMessage({ socket ,handleBackButtonClick,showChat}) {
       socket.emit("add-user", singleChatdata?._id);
 
       socket.on("msg-recieved", (msg) => {
-      
         setArrivalMessage({
           fromSelf: false,
           message: msg.message === "" ? msg.fileData : msg.message,
@@ -57,9 +59,9 @@ function WhatsappMessage({ socket ,handleBackButtonClick,showChat}) {
         });
         dispatch(Notifications(msg));
       });
-      socket.on("lastmessage", (data) => {
-        console.log(56, data);
-      });
+      // socket.on("lastmessage", (data) => {
+      //   console.log(56, data);
+      // });
     }
     return () => {
       socket.off("connect ");
@@ -106,7 +108,6 @@ function WhatsappMessage({ socket ,handleBackButtonClick,showChat}) {
           await ApiService(apiList.SEND_MESSAGE, "POST", bodyformData, true);
         };
 
-        console.log("Sending message with file:", bodyformData);
         reader.readAsArrayBuffer(file);
         setChosenEmoji("");
         setFile("");
@@ -147,7 +148,7 @@ function WhatsappMessage({ socket ,handleBackButtonClick,showChat}) {
           "POST",
           values
         );
-       
+
         setMessages(apiRes);
       }
     };
@@ -176,9 +177,18 @@ function WhatsappMessage({ socket ,handleBackButtonClick,showChat}) {
     };
   }, []);
 
-  console.log("1222", chosenEmoji);
+
+console.log(178,showClickdata);
+console.log(179,showChat);
   return (
-    <div className="xl:w-[75%] w-[100%] border h-[100%] flex flex-col" id="modal">
+    <div
+      className={
+        !showChat
+          ? "xl:w-[75%] w-[100%] border h-[100%] flex flex-col"
+          :"hidden" 
+      }
+      id="modal"
+    >
       {singleChatdata === null ? (
         <EmptyChat />
       ) : (
@@ -186,8 +196,11 @@ function WhatsappMessage({ socket ,handleBackButtonClick,showChat}) {
           {/* Header */}
           <div className="py-2 px-3 bg-grey-lighter flex flex-row justify-between items-center">
             <div className="flex items-center">
-              <div className="flex xl:hidden  mx-2" onClick={handleBackButtonClick}>
-              <ArrowBackIosIcon className="header_icon"/>
+              <div
+                className="flex xl:hidden  sm:mx-2 "
+                onClick={handleBackButtonClick}
+              >
+                <ArrowBackIosIcon className="header_icon" />
               </div>
               <div>
                 <img
@@ -202,12 +215,12 @@ function WhatsappMessage({ socket ,handleBackButtonClick,showChat}) {
                 </p>
               </div>
             </div>
-            <div className="flex">
+            <div className="sm:flex block">
               <div>
                 <SearchIcon className="header_icon" />
               </div>
 
-              <div className="ml-6">
+              <div className="sm:ml-6">
                 <MoreVertSharpIcon className="header_icon" />
               </div>
             </div>
