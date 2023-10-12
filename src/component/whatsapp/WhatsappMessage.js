@@ -33,9 +33,7 @@ function WhatsappMessage({ socket, handleBackButtonClick, showChat }) {
   const singleChatdata = useSelector(
     (state) => state?.ChatUserListReducer?.singleChat
   );
-  const showClickdata = useSelector(
-    (state) => state?.ChatUserListReducer?.showclick
-  );
+
 
   const handleFileChange = (e) => {
     const imagefile = e.target.files[0];
@@ -157,6 +155,7 @@ function WhatsappMessage({ socket, handleBackButtonClick, showChat }) {
 
   useEffect(() => {
     arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
+  
   }, [arrivalMessage]);
 
   useEffect(() => {
@@ -178,8 +177,6 @@ function WhatsappMessage({ socket, handleBackButtonClick, showChat }) {
   }, []);
 
 
-console.log(178,showClickdata);
-console.log(179,showChat);
   return (
     <div
       className={
@@ -230,8 +227,10 @@ console.log(179,showChat);
           <div
             className="flex-1 overflow-y-auto"
             style={{ backgroundColor: "#DAD3CC" }}
+           
+         
           >
-            <div className="py-2 px-3">
+            <div className="py-2 px-3" >
               <div className="flex justify-center mb-2">
                 <div
                   className="rounded py-2 px-4"
@@ -252,7 +251,7 @@ console.log(179,showChat);
                 </div>
               </div>
 
-              <div className="chat-messages">
+              <div className="chat-messages" >
                 {messages?.map((message) => {
                   return (
                     <Message
@@ -260,6 +259,8 @@ console.log(179,showChat);
                       message={message}
                       userData={userData}
                       singleChatdata={singleChatdata}
+                      chosenEmoji={chosenEmoji}
+                  
                     />
                   );
                 })}
@@ -281,16 +282,18 @@ console.log(179,showChat);
           <div
             className="bg-grey-lighter px-4 py-4 flex items-center"
             ref={modalRef}
+            
           >
-            <div onClick={() => setShowPicker((val) => !val)}>
+            <div onClick={() => setShowPicker((val) => !val)} >
               <SentimentSatisfiedAltRoundedIcon className="header_icon" />
             </div>
-            <div className="flex w-full mx-4 items-center">
+            <div className="flex w-full mx-4 items-center  input-area" >
               <input
                 className="w-full border rounded px-2 py-2"
                 type="text"
                 value={chosenEmoji}
                 onChange={(e) => setChosenEmoji(e.target.value)}
+              
               />
               <span className="mx-[-38px]" onClick={sendMessage}>
                 {" "}

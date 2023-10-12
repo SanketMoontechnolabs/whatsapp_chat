@@ -5,7 +5,7 @@ import ImageViewer from "../imgViewer/ImageViewer";
 import { useState } from "react";
 import { URLS } from "../../API/UrlList";
 
-const Message = ({ message, userData, singleChatdata }) => {
+const Message = ({ message, userData, singleChatdata,chosenEmoji }) => {
   const scrollRef = useRef();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -14,15 +14,16 @@ const Message = ({ message, userData, singleChatdata }) => {
 
   const isImage = message.type === "image " || "images";
 
-  useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [message]);
-
   const urlSegment =
     message.fromSelf && message.type === "images"
       ? message?.message
       : message?.message?.fileName;
 
+  useEffect(() => {
+    if (!chosenEmoji) {
+      scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [chosenEmoji]);
   useEffect(() => {
     const imageUrl = `${URLS?.IMAGE_URL}/image/${urlSegment}`;
 
@@ -31,17 +32,18 @@ const Message = ({ message, userData, singleChatdata }) => {
 
   return (
     <div
-      ref={scrollRef}
       className={`message 
                     ${message.fromSelf ? "sended" : "recieved"}`}
     >
-      <div className="sm:max-w-[30%] ">
+      <div className="sm:max-w-[30%] " ref={scrollRef}>
         <div className="rounded py-2 px-3 content ">
           <p className="text-sm">
             {message.fromSelf ? userData?.name : singleChatdata?.name}
           </p>
           {!isImage || message.type === "text" ? (
-            <p className="break-all sm:text-[1.1rem] text-sm  mt-1">{message?.message}</p>
+            <p className="break-all sm:text-[1.1rem] text-sm  mt-1">
+              {message?.message}
+            </p>
           ) : (
             <>
               <img
@@ -76,6 +78,7 @@ Message.propTypes = {
   message: PropTypes.any,
   userData: PropTypes.any,
   singleChatdata: PropTypes.any,
+  chosenEmoji: PropTypes.any,
 };
 
 export default Message;
