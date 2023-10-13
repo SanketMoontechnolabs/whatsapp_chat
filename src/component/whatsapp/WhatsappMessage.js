@@ -268,7 +268,7 @@ function WhatsappMessage({ socket, handleBackButtonClick, showChat }) {
             </div>
           </div>
           {showPicker && (
-            <div className="absolute mt-[270px]" ref={pickerRef}>
+            <div className="absolute sm:mt-[270px] mt-[364px]" ref={pickerRef}>
               <Picker
                 pickerStyle={{ width: "100%" }}
                 onEmojiClick={(emojiObject) =>

@@ -117,6 +117,10 @@
         margin-inline: 22% !important;
         width: 66%!important;
     }
+    .EmojiPickerReact {
+        height: 356px !important;
+    width: 267px !important;
+    }
     
   }
   @media only screen and (max-width: 445px) {   
@@ -125,4 +129,10 @@
        width: 50%!important;
     } 
   }
+  @media only screen and (max-width: 413px) {   
+    .EmojiPickerReact {
+        height: 356px !important;
+    width: 215px !important;
+  }
 
+  }

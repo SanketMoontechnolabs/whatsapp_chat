@@ -22,10 +22,15 @@ const validationSchema = Yup.object({
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+ 
+
   const dispatch = useDispatch();
   const naviagte = useNavigate();
 
   const onSubmit = async (values) => {
+    console.log(31,values);
+   
+  
     const apiRes = await ApiService(apiList.LOGIN, "POST", values);
    
     if (apiRes.accessToken) {
@@ -43,8 +48,28 @@ const Login = () => {
   };
 
   const googleLogin = async (response) => {
-    await jwt_decode(response.credential);
+   const googleEmail = await jwt_decode(response.credential);
+
+    const authdata = {
+      email: googleEmail.email,
+    };
+    console.log(50,googleEmail.email);
+    const apiRes = await ApiService(apiList.LOGIN, "POST", authdata);
+  
+    if (apiRes.accessToken) {
+      toast.success("Successfully logged in with Google");
+      naviagte("/dashboard");
+      dispatch(
+        AuthAction({
+          token: apiRes.accessToken,
+          userData: apiRes.data,
+        })
+      );
+    } else {
+      toast.error(apiRes.msg);
+    }
   };
+
 
   const validation = useFormik({
     enableReinitialize: true,
@@ -64,6 +89,7 @@ const Login = () => {
               buttonText="Login"
               onSuccess={(responseGoogle) => {
                 googleLogin(responseGoogle);
+                
               }}
               onError={() => {
                 console.log("Login Failed");
