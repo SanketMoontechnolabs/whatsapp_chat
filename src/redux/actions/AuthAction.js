@@ -31,9 +31,10 @@ export const AuthAction = (user) => {
       payload,
     }
   }
-  export const ShowClick = (payload) => {
+ 
+  export const VoiceRecord = (payload) => {
     return {
-      type: ActionTypes.SET_SHOW_CLICK,
+      type: ActionTypes.VOICE_RECORD,
       payload,
     }
   }

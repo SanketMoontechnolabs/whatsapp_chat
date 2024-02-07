@@ -6,7 +6,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import AttachmentTwoToneIcon from "@mui/icons-material/AttachmentTwoTone";
 import MoreVertSharpIcon from "@mui/icons-material/MoreVertSharp";
 import SentimentSatisfiedAltRoundedIcon from "@mui/icons-material/SentimentSatisfiedAltRounded";
-import KeyboardVoiceRoundedIcon from "@mui/icons-material/KeyboardVoiceRounded";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { store } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +16,7 @@ import { apiList } from "../../API/ApiList";
 import Message from "./Message";
 import { Notifications } from "../../redux/actions/AuthAction";
 import { URLS } from "../../API/UrlList";
+import VoiceRecorder from "../voiceRecorder/VoiceRecorder";
 
 function WhatsappMessage({ socket, handleBackButtonClick, showChat }) {
   const [showPicker, setShowPicker] = useState(false);
@@ -24,6 +24,7 @@ function WhatsappMessage({ socket, handleBackButtonClick, showChat }) {
   const [messages, setMessages] = useState([]);
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [file, setFile] = useState(null);
+  const [audioURL, setAudioURL] = useState("");
   const modalRef = useRef();
   const pickerRef = useRef(null);
 
@@ -34,6 +35,7 @@ function WhatsappMessage({ socket, handleBackButtonClick, showChat }) {
     (state) => state?.ChatUserListReducer?.singleChat
   );
 
+  console.log(41, audioURL);
 
   const handleFileChange = (e) => {
     const imagefile = e.target.files[0];
@@ -47,9 +49,11 @@ function WhatsappMessage({ socket, handleBackButtonClick, showChat }) {
         console.log("Connected to Socket.io server");
       });
 
+    
       socket.emit("add-user", singleChatdata?._id);
 
       socket.on("msg-recieved", (msg) => {
+        console.log("msg-recieved",msg);
         setArrivalMessage({
           fromSelf: false,
           message: msg.message === "" ? msg.fileData : msg.message,
@@ -57,9 +61,7 @@ function WhatsappMessage({ socket, handleBackButtonClick, showChat }) {
         });
         dispatch(Notifications(msg));
       });
-      // socket.on("lastmessage", (data) => {
-      //   console.log(56, data);
-      // });
+    
     }
     return () => {
       socket.off("connect ");
@@ -68,6 +70,7 @@ function WhatsappMessage({ socket, handleBackButtonClick, showChat }) {
 
   const fileType = chosenEmoji?.name?.endsWith(".pdf") ? "pdf" : "image";
   console.log(600, fileType);
+
 
   const sendMessage = async () => {
     if (chosenEmoji || file) {
@@ -110,31 +113,36 @@ function WhatsappMessage({ socket, handleBackButtonClick, showChat }) {
         setChosenEmoji("");
         setFile("");
       } else {
+
+      console.log("119","sanket patel");
         newMessage = {
           to: singleChatdata?._id,
           from: userData,
           message: chosenEmoji || file.name,
           time: new Date().toUTCString(),
           isRead: false,
-          type: "text",
+          type: audioURL? "voice": "text",
         };
 
-        setChosenEmoji("");
+        await setChosenEmoji("");       
         socket.emit("sendMessage", newMessage);
         await ApiService(apiList.SEND_MESSAGE, "POST", newMessage);
+      
       }
 
       const msgs = [...messages];
       msgs.push({
         fromSelf: true,
         message: chosenEmoji || file.name,
-        type: file ? "images" : "text",
+        type: file ? "images" : audioURL ? "voice": "text",
       });
       setMessages(msgs);
     }
   };
 
+
   useEffect(() => {
+   
     const fetchData = async () => {
       if (singleChatdata) {
         const values = {
@@ -151,11 +159,10 @@ function WhatsappMessage({ socket, handleBackButtonClick, showChat }) {
       }
     };
     fetchData();
-  }, [singleChatdata, userData]);
+  }, [singleChatdata, userData,audioURL]);
 
   useEffect(() => {
     arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
-  
   }, [arrivalMessage]);
 
   useEffect(() => {
@@ -169,25 +176,24 @@ function WhatsappMessage({ socket, handleBackButtonClick, showChat }) {
         setShowPicker(false);
       }
     }
-
+ 
     window.addEventListener("click", handler);
     return () => {
       window.removeEventListener("click", handler);
     };
-  }, []);
-
-
+  }, [])
+    
   return (
     <div
       className={
         !showChat
           ? "xl:w-[75%] w-[100%] border h-[100%] flex flex-col"
-          :"hidden" 
+          : "hidden"
       }
       id="modal"
     >
       {singleChatdata === null ? (
-        <EmptyChat handleBackButtonClick={handleBackButtonClick}/>
+        <EmptyChat handleBackButtonClick={handleBackButtonClick} />
       ) : (
         <>
           {/* Header */}
@@ -227,10 +233,8 @@ function WhatsappMessage({ socket, handleBackButtonClick, showChat }) {
           <div
             className="flex-1 overflow-y-auto"
             style={{ backgroundColor: "#DAD3CC" }}
-           
-         
           >
-            <div className="py-2 px-3" >
+            <div className="py-2 px-3">
               <div className="flex justify-center mb-2">
                 <div
                   className="rounded py-2 px-4"
@@ -251,7 +255,7 @@ function WhatsappMessage({ socket, handleBackButtonClick, showChat }) {
                 </div>
               </div>
 
-              <div className="chat-messages" >
+              <div className="chat-messages">
                 {messages?.map((message) => {
                   return (
                     <Message
@@ -260,7 +264,6 @@ function WhatsappMessage({ socket, handleBackButtonClick, showChat }) {
                       userData={userData}
                       singleChatdata={singleChatdata}
                       chosenEmoji={chosenEmoji}
-                  
                     />
                   );
                 })}
@@ -282,18 +285,17 @@ function WhatsappMessage({ socket, handleBackButtonClick, showChat }) {
           <div
             className="bg-grey-lighter px-4 py-4 flex items-center"
             ref={modalRef}
-            
           >
-            <div onClick={() => setShowPicker((val) => !val)} >
+            <div onClick={() => setShowPicker((val) => !val)}>
               <SentimentSatisfiedAltRoundedIcon className="header_icon" />
             </div>
-            <div className="flex w-full mx-4 items-center  input-area" >
+            <div className="flex w-full mx-4 items-center  input-area">
               <input
                 className="w-full border rounded px-2 py-2"
                 type="text"
                 value={chosenEmoji}
+                placeholder="Say Something..."
                 onChange={(e) => setChosenEmoji(e.target.value)}
-              
               />
               <span className="mx-[-38px]" onClick={sendMessage}>
                 {" "}
@@ -312,7 +314,7 @@ function WhatsappMessage({ socket, handleBackButtonClick, showChat }) {
               </label>
             </div>
             <div>
-              <KeyboardVoiceRoundedIcon className="header_icon" />
+              <VoiceRecorder setAudioURL={setAudioURL} audioURL={audioURL} setChosenEmoji={setChosenEmoji} />
             </div>
           </div>
         </>

@@ -25,7 +25,7 @@ const WhatsappList = ({ socket, showChat,setShowChat }) => {
   const { loading } = store.getState().LoaderReducer;
   const { userData } = store.getState().AuthReducer;
   const [chatKey, setChatKey] = useState("");
-  // const [showclick, setshowclick] = useState(false);
+
 
 
   const singleChatdata = useSelector(
@@ -85,7 +85,7 @@ const WhatsappList = ({ socket, showChat,setShowChat }) => {
   
   return (
     <div
-      className={showChat ? "xl:w-[25%] w-[100%]  border xl:flex h-[500px] flex-col" :`xl:w-[25%] w-[100%]  border xl:flex hidden flex-col`}
+      className={showChat ? "xl:w-[25%] w-[100%]  border xl:flex md:h-[797px] h-[796px] flex-col" :`xl:w-[25%] w-[100%]  border xl:flex hidden flex-col`}
     >
       {/* Header */}
       <div className=" px-3 bg-grey-lighter sm:flex block flex-row justify-between items-center">
@@ -120,7 +120,7 @@ const WhatsappList = ({ socket, showChat,setShowChat }) => {
       </div>
 
       {/* Contacts */}
-      <div className="bg-grey-lighter flex-1 overflow-auto">
+      <div className="bg-grey-lighter flex-1 overflow-auto ">
         {!loading && filteredUsers?.length !== 0 ? (
           filteredUsers?.map((item, index) => (
             <div

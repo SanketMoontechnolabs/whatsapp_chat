@@ -43,7 +43,7 @@ const Whatsapp = () => {
         />
         <div className=" sm:mt-[-112px] mt-[-139px]" >
           <div className="py-2">
-            <div className={`block xl:flex border border-grey rounded shadow-lg ${!showChat ?"h-[800px]":"h-[500px] md:h-[800px]"} `}>
+            <div className={`block xl:flex border border-grey rounded shadow-lg ${!showChat ?"h-[800px]":" md:h-[800px]"} `}>
              <WhatsappList socket={socket} showChat={showChat} setShowChat={setShowChat}/>
                 <WhatsappMessage socket={socket} handleBackButtonClick={handleBackButtonClick} showChat={showChat}  />
             </div>

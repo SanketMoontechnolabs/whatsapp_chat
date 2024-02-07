@@ -84,7 +84,7 @@ const Login = () => {
           <h2 className="mb-12 text-center text-5xl font-extrabold">
             Welcome.
           </h2>
-          <GoogleOAuthProvider clientId="420808172961-qh7r67c4li8puci68jvg5l373c46k2dp.apps.googleusercontent.com">
+          <GoogleOAuthProvider clientId="594474607571-672frh10m5em9lhm65vg8j9uii6ts43d.apps.googleusercontent.com">
             <GoogleLogin
               buttonText="Login"
               onSuccess={(responseGoogle) => {

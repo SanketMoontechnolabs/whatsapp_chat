@@ -64,7 +64,7 @@ const ApiService = async (url, type, data, formData = false, tokenValue = '') =>
   }
 
   return response.json()
-}
-
-export default ApiService
-          
+}            
+        
+export default ApiService  
+                                         
