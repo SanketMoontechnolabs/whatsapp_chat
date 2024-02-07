@@ -82,7 +82,8 @@ const WhatsappList = ({ socket, showChat,setShowChat }) => {
   };
 
   const filteredUsers = allUser?.filter((user) => user._id !== userData?._id);
-  
+  console.log(85,filteredUsers?.length);
+  console.log(86,loading);
   return (
     <div
       className={showChat ? "xl:w-[25%] w-[100%]  border xl:flex md:h-[797px] h-[796px] flex-col" :`xl:w-[25%] w-[100%]  border xl:flex hidden flex-col`}
@@ -120,7 +121,7 @@ const WhatsappList = ({ socket, showChat,setShowChat }) => {
       </div>
 
       {/* Contacts */}
-      <div className="bg-grey-lighter flex-1 overflow-auto ">
+      <div className="bg-grey-lighter flex-1 overflow-auto md:h-[660px] h-[660px] ">
         {!loading && filteredUsers?.length !== 0 ? (
           filteredUsers?.map((item, index) => (
             <div
@@ -158,7 +159,7 @@ const WhatsappList = ({ socket, showChat,setShowChat }) => {
               </div>
             </div>
           ))
-        ) : search === "" || (search !== "" && filteredUsers?.length !== 0) ? (
+        ) : (search === "" && loading ) || (search !== "" && filteredUsers?.length !== 0) ? (
           <Box
             display="flex"
             justifyContent="center"

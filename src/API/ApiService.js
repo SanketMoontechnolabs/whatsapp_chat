@@ -21,9 +21,9 @@ const ApiService = async (url, type, data, formData = false, tokenValue = '') =>
     body: formData ? data : JSON.stringify(data),
     redirect: 'follow',
   }
-
+console.log(244,requestOptions);
   const response = await fetch(`${URLS.BASE_URL}/${url}`, requestOptions)
-
+console.log(299,response);
   if (response.status === 401) {
     const result = await (
       await fetch(`${URLS.BASE_URL}/auth/refresh_token`, {
@@ -51,7 +51,7 @@ const ApiService = async (url, type, data, formData = false, tokenValue = '') =>
     }
 
     return
-  } else if (response.status === 409) {
+  } else if (response.status === 403) {
     if (!loginErrorDisplayed) {
       toast.error('You need to login first.')
       loginErrorDisplayed = true

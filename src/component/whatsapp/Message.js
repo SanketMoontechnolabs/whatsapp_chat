@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import ImageViewer from "../imgViewer/ImageViewer";
 import { useState } from "react";
 import { URLS } from "../../API/UrlList";
-import AudioPlayer from "../voiceRecorder/Audioplayer";
+import AudioPlayer from "../../component/voiceRecorder/AudioPlayer";
 
 const Message = ({ message, userData, singleChatdata, chosenEmoji }) => {
   const scrollRef = useRef();
@@ -52,7 +52,7 @@ const Message = ({ message, userData, singleChatdata, chosenEmoji }) => {
       className={`message 
                     ${message.fromSelf ? "sended" : "recieved"}`}
     >
-      <div className="sm:max-w-[30%] " ref={scrollRef}>
+      <div className="max-w-full " ref={scrollRef}>
         <div className="rounded py-2 px-3 content ">
           <p className="text-sm">
             {message.fromSelf ? userData?.name : singleChatdata?.name}

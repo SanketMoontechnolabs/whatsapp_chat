@@ -3,13 +3,14 @@ import { useState, useEffect } from "react";
 import MicOffIcon from "@mui/icons-material/MicOff";
 
 import PropTypes from "prop-types";
+// import AudioPlayer from "./AudioPlayer";
 
 
 const VoiceRecorder = ({audioURL,setAudioURL,setChosenEmoji}) => {
 
   const [recording, setRecording] = useState(false);
   const [mediaRecorder, setMediaRecorder] = useState(null);
-  // const [audioURL, setAudioURL] = useState(null);
+ 
 
   useEffect(() => {
     if (mediaRecorder) {
@@ -42,6 +43,7 @@ const VoiceRecorder = ({audioURL,setAudioURL,setChosenEmoji}) => {
         setMediaRecorder(mediaRecorder);
       })
       .catch((error) => {
+        console.log(45,error);
         console.error("Error accessing microphone:", error);
       });
   };
@@ -68,7 +70,7 @@ console.log(68,audioURL);
 
       {/* {audioURL && (
       <AudioPlayer audioBlob={audioURL}/>
-      )} */}
+      )}  */}
 
       
     </div>
